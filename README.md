@@ -1,6 +1,6 @@
 ![image alt](https://github.com/Hu-mao/2048/blob/19fe77b569cbe50b6474bd6afbb2f255315b9c71/photos/2048_Game(1).png)
 
-# How to Play
+# 💡 How to Play
 
 ## 1. Starting the Game
 The game begins with two tiles appearing on the grid, each typically showing a 2 or sometimes a 4.
@@ -28,7 +28,7 @@ The game ends when the entire 4×4 grid is filled and no merges are possible.
 
 # ✨ The Game of 2048: A Simple Challenge, Endless Depth
 
-### 2048 is more than just a puzzle — it's an elegant, deceptively simple journey into numerical strategy.
+### 🧩 2048 is more than just a puzzle — it's an elegant, deceptively simple journey into numerical strategy.
 Set on a modest 4×4 grid, the game challenges your foresight and spatial thinking with nothing more than powers of two.
 
 **Experience the flow:**
@@ -36,4 +36,4 @@ Set on a modest 4×4 grid, the game challenges your foresight and spatial thinki
 - **The Magic:** Watch as identical numbers collide and merge into larger, more powerful tiles (8, 16, 32, …).  
 - **The Goal:** Strategically manage the numbers and chase the ultimate tile — **2048**.
 
-Easy to learn but difficult to master, 2048 blends luck and logic into a timeless numerical dance.
+🔍 Easy to learn but difficult to master, 2048 blends luck and logic into a timeless numerical dance.
