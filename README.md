@@ -36,4 +36,8 @@ Set on a modest 4×4 grid, the game challenges your foresight and spatial thinki
 - **The Magic:** Watch as identical numbers collide and merge into larger, more powerful tiles (8, 16, 32, …).  
 - **The Goal:** Strategically manage the numbers and chase the ultimate tile — **2048**.
 
-🔍 Easy to learn but difficult to master, 2048 blends luck and logic into a timeless numerical dance.
+### 🔍 Easy to learn but difficult to master, 2048 blends luck and logic into a timeless numerical dance.
+
+
+
+![giphy](https://github.com/user-attachments/assets/7bd2fd51-f417-453e-8f9c-789ce3560595)
