@@ -1,3 +1,5 @@
+# How to Play
+
 ## 1. Starting the Game
 The game begins with two tiles appearing on the grid, each typically showing a 2 or sometimes a 4.
 
