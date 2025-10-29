@@ -1,3 +1,5 @@
+![image alt](https://github.com/Hu-mao/2048/blob/7122c5341bef35f87d7fae2025bad5525bbde2b0/photos/2048_Game.png)
+
 # How to Play
 
 ## 1. Starting the Game
