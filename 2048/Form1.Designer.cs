@@ -101,7 +101,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(131, 48);
             this.button1.TabIndex = 3;
-            this.button1.Text = "new game";
+            this.button1.Text = "NEW GAME";
             this.button1.UseVisualStyleBackColor = false;
             // 
             // Score
