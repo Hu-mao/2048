@@ -1,4 +1,4 @@
-![image alt](https://github.com/Hu-mao/2048/blob/7122c5341bef35f87d7fae2025bad5525bbde2b0/photos/2048_Game.png)
+![image alt]([https://github.com/Hu-mao/2048/blob/7122c5341bef35f87d7fae2025bad5525bbde2b0/photos/2048_Game.png](https://github.com/Hu-mao/2048/blob/6725041bce59503e8f1d1462bca0db42d8137f71/photos/2048_Game(1).png))
 
 # How to Play
 
