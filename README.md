@@ -43,7 +43,7 @@ Set on a modest 4×4 grid, the game challenges your foresight and spatial thinki
 </p>
 
 <h1 align="right">
-  Team
+ 👥 Team
 </h1>
 <h3 align="right">
   Hu-mao (Illia)<br>
