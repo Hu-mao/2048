@@ -41,3 +41,12 @@ Set on a modest 4×4 grid, the game challenges your foresight and spatial thinki
 <p align="center">
   <img src="https://github.com/user-attachments/assets/7bd2fd51-f417-453e-8f9c-789ce3560595" alt="funny gif">
 </p>
+
+<h1 align="right">
+  Team
+</h1>
+<h3 align="right">
+  Hu-mao (Illia)<br>
+  Makarcco (Makar)<br>
+  mezter-iv (Volodymyr)<br>
+</h3>
