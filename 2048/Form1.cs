@@ -71,7 +71,7 @@ namespace _2048
                     {
                         for (int x = 3; x >= 0; x--)
                         {
-                            for (int x2 = x -1; x2 >= 0; x2--)
+                            for (int x2 = x-1; x2 >= 0; x2--)
                             {
                                 if (fields[y, x].Text == "" && fields[y, x2].Text != "")
                                 {
@@ -85,11 +85,40 @@ namespace _2048
                     }
                     break;
                 case Keys.W:
-
-
+                    for (int y = 0; y < 4; y++)
+                    {
+                        for (int x = 3; x >= 0; x--)
+                        {
+                            for (int y2 = y + 1; y2 < 4; y2++)
+                            {
+                                if (fields[y, x].Text == "" && fields[y2, x].Text != "")
+                                {
+                                    fields[y, x].BackColor = fields[y2, x].BackColor;
+                                    fields[y, x].Text = fields[y2, x].Text;
+                                    fields[y2, x].Text = "";
+                                    fields[y2, x].BackColor = Color.FromArgb(62, 40, 97);
+                                }
+                            }   
+                        }
+                    }
                     break;
                 case Keys.S:
-
+                    for (int y = 3; y > 0; y--)
+                    {
+                        for (int x = 3; x >= 0; x--)
+                        {
+                            for (int y2 = y - 1; y2 >=0; y2--)
+                            {
+                                if (fields[y, x].Text == "" && fields[y2, x].Text != "")
+                                {
+                                    fields[y, x].BackColor = fields[y2, x].BackColor;
+                                    fields[y, x].Text = fields[y2, x].Text;
+                                    fields[y2, x].Text = "";
+                                    fields[y2, x].BackColor = Color.FromArgb(62, 40, 97);
+                                }
+                            }
+                        }
+                    }
                     break;
             }
         }
