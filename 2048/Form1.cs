@@ -40,7 +40,6 @@ namespace _2048
             fields[num[0], num[1]].BackColor = Color.FromArgb(63, 196, 181);
             fields[num[0], num[1]].Text = "2";
         }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             InitializeNewScore();
@@ -65,6 +64,13 @@ namespace _2048
                                     fields[y, x2].Text = "";
                                     fields[y, x2].BackColor = Color.FromArgb(62, 40, 97);
                                 }
+                                else if (fields[y, x].Text != "" && fields[y, x].Text == fields[y, x2].Text) {
+                                    int value = Convert.ToInt32(fields[y, x].Text) * 2;
+                                    fields[y, x].BackColor = Color.FromArgb(62, 40 - (10 * int.Parse(fields[y, x].Text)), 97)
+                                    fields[y, x].Text = Convert.ToString(value);
+                                    fields[y, x2].Text = "";
+                                    fields[y, x2].BackColor = Color.FromArgb(62, 40, 97);
+                                }
                             }
                         }
                     }
@@ -81,6 +87,14 @@ namespace _2048
                                 {
                                     fields[y, x].BackColor = fields[y, x2].BackColor;
                                     fields[y, x].Text = fields[y, x2].Text;
+                                    fields[y, x2].Text = "";
+                                    fields[y, x2].BackColor = Color.FromArgb(62, 40, 97);
+                                }
+                                else if (fields[y, x].Text != "" && fields[y, x].Text == fields[y, x2].Text)
+                                {
+                                    int value = Convert.ToInt32(fields[y, x].Text) * 2;
+                                    fields[y, x].BackColor = Color.FromArgb(62, 40 - (10 * int.Parse(fields[y, x].Text)), 97)
+                                    fields[y, x].Text = Convert.ToString(value);
                                     fields[y, x2].Text = "";
                                     fields[y, x2].BackColor = Color.FromArgb(62, 40, 97);
                                 }
@@ -103,6 +117,14 @@ namespace _2048
                                     fields[y2, x].Text = "";
                                     fields[y2, x].BackColor = Color.FromArgb(62, 40, 97);
                                 }
+                                else if (fields[y, x].Text != "" && fields[y, x].Text == fields[y2, x].Text)
+                                {
+                                    int value = Convert.ToInt32(fields[y, x].Text) * 2;
+                                    fields[y, x].BackColor = Color.FromArgb(62, 40 - (10 * int.Parse(fields[y, x].Text)), 97)
+                                    fields[y, x].Text = Convert.ToString(value);
+                                    fields[y2, x].Text = "";
+                                    fields[y2, x].BackColor = Color.FromArgb(62, 40, 97);
+                                }
                             }   
                         }
                     }
@@ -119,6 +141,14 @@ namespace _2048
                                 {
                                     fields[y, x].BackColor = fields[y2, x].BackColor;
                                     fields[y, x].Text = fields[y2, x].Text;
+                                    fields[y2, x].Text = "";
+                                    fields[y2, x].BackColor = Color.FromArgb(62, 40, 97);
+                                }
+                                else if (fields[y, x].Text != "" && fields[y, x].Text == fields[y2, x].Text)
+                                {
+                                    int value = Convert.ToInt32(fields[y, x].Text) * 2;
+                                    fields[y, x].BackColor = Color.FromArgb(62, 40 - (10 * int.Parse(fields[y, x].Text)), 97)
+                                    fields[y, x].Text = Convert.ToString(value);
                                     fields[y2, x].Text = "";
                                     fields[y2, x].BackColor = Color.FromArgb(62, 40, 97);
                                 }
