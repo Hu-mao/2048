@@ -14,7 +14,7 @@ namespace _2048
     {
         Label[,] fields;
         Random rndNum = new Random();
-        public Form1()
+    public Form1()
         {
             InitializeComponent();
             this.KeyPreview = true; 
@@ -85,6 +85,7 @@ namespace _2048
         }
         private void InitializeNewScore()
         {
+
             int[] num;
             int newnum = rndNum.Next(0, 2);
             while (true)
@@ -258,6 +259,64 @@ namespace _2048
             }
             else {
                 MessageBox.Show("You Lose!");
+            }
+        }
+
+        private void ChangeTheme_Click(object sender, EventArgs e)
+        {
+
+            int[,] colors = new int[,] { };
+            ;
+
+            if (ChangeTheme.Text == "🌙")
+            {
+                ChangeTheme.Text = "🔅";
+                colors = new int[,]
+                {
+        { 112, 94, 77 },
+        { 255, 252, 245 },
+        { 199, 196, 189 },
+        { 112, 94, 77 },
+        { 255, 252, 245 }
+                };
+                for (int y = 0; y < 4; y++) for (int x = 3; x >= 0; x--) fields[y, x].ForeColor = Color.FromArgb(colors[0, 0], colors[0, 1], colors[0, 2]);
+            }
+            else
+            {
+                ChangeTheme.Text = "🌙";
+                colors = new int[,]
+                {
+        { 62, 40, 97 },
+        { 102, 59, 143 },
+        { 180, 161, 212 },
+        { 255, 255, 255 },
+        { 63, 196, 181 }
+                };
+                for (int y = 0; y < 4; y++) for (int x = 3; x >= 0; x--) fields[y, x].ForeColor = Color.FromArgb(255, 255, 255);
+            }
+
+            ChangeTheme.ForeColor = Color.FromArgb(colors[0, 0], colors[0, 1], colors[0, 2]);
+            this.BackColor = Color.FromArgb(colors[1, 0], colors[1, 1], colors[1, 2]);
+            NewGameButton.BackColor = Color.FromArgb(colors[0, 0], colors[0, 1], colors[0, 2]);
+            NewGameButton.ForeColor = Color.FromArgb(colors[2, 0], colors[2, 1], colors[2, 2]);
+            GameName.ForeColor = Color.FromArgb(colors[3, 0], colors[3, 1], colors[3, 2]);
+            DecoratinLine2.ForeColor = Color.FromArgb(colors[0, 0], colors[0, 1], colors[0, 2]);
+            DecorationLine1.ForeColor = Color.FromArgb(colors[0, 0], colors[0, 1], colors[0, 2]);
+            Comment.ForeColor = Color.FromArgb(colors[2, 0], colors[2, 1], colors[2, 2]);
+            Score.BackColor = Color.FromArgb(colors[0, 0], colors[0, 1], colors[0, 2]);
+            ScoreNum.BackColor = Color.FromArgb(colors[0, 0], colors[0, 1], colors[0, 2]);
+            Best.BackColor = Color.FromArgb(colors[0, 0], colors[0, 1], colors[0, 2]);
+            BestNum.BackColor = Color.FromArgb(colors[0, 0], colors[0, 1], colors[0, 2]);
+            Best.ForeColor = Color.FromArgb(colors[2, 0], colors[2, 1], colors[2, 2]);
+            BestNum.ForeColor = Color.FromArgb(colors[2, 0], colors[2, 1], colors[2, 2]);
+            BGfields.BackColor = Color.FromArgb(colors[0, 0], colors[0, 1], colors[0, 2]);
+            for (int y = 0; y < 4; y++)
+            {
+                for (int x = 3; x >= 0; x--)
+                {
+                    if (fields[y, x].Text == "") fields[y, x].BackColor = Color.FromArgb(colors[0, 0], colors[0, 1], colors[0, 2]);
+                    else fields[y, x].BackColor = Color.FromArgb(colors[4, 0], colors[4, 1], colors[4, 2]);
+                }
             }
         }
     }
