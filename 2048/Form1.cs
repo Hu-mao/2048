@@ -29,16 +29,78 @@ namespace _2048
             };
 
         }
+        private void HardColorChanging(Label label)
+        {
+            if (label.Text == "4")
+            {
+                label.BackColor = Color.FromArgb(63, 106, 101);
+            }
+            else if (label.Text == "8")
+            {
+                label.BackColor = Color.FromArgb(63, 156, 100);
+            }
+            else if (label.Text == "16")
+            {
+                label.BackColor = Color.FromArgb(63, 106, 100);
+            }
+            else if (label.Text == "32")
+            {
+                label.BackColor = Color.FromArgb(63, 106, 50);
+            }
+            else if (label.Text == "64")
+            {
+                label.BackColor = Color.FromArgb(103, 106, 50);
+            }
+            else if (label.Text == "128")
+            {
+                label.BackColor = Color.FromArgb(103, 156, 50);
+            }
+            else if (label.Text == "256")
+            {
+                label.BackColor = Color.FromArgb(153, 156, 50);
+            }
+            else if (label.Text == "512")
+            {
+                label.BackColor = Color.FromArgb(153, 156, 100);
+            }
+            else if (label.Text == "1024")
+            {
+                label.BackColor = Color.FromArgb(153, 256, 100);
+            }
+            else if (label.Text == "2048")
+            {
+                label.BackColor = Color.FromArgb(253, 256, 100);
+            }
+        }
+        private bool IfICanMove() {
+            for (int y = 0; y < 4; y++) {
+                for (int x = 0; x < 4; x++) {
+                    if (fields[y, x].Text == "") {
+                        return true;
+                        break;
+                    }
+                }
+            }
+            return false;
+        }
         private void InitializeNewScore()
         {
             int[] num;
+            int newnum = rndNum.Next(0, 2);
             while (true)
             {
-                num = new int[] { rndNum.Next(0, 3), rndNum.Next(0, 3) };
+                num = new int[] { rndNum.Next(0, 4), rndNum.Next(0, 4) };
                 if (fields[num[0], num[1]].Text == "") break;
             }
             fields[num[0], num[1]].BackColor = Color.FromArgb(63, 196, 181);
-            fields[num[0], num[1]].Text = "2";
+            if (newnum == 0)
+            {
+                fields[num[0], num[1]].Text = "2";
+            }
+            else {
+                fields[num[0], num[1]].Text = "4";
+                fields[num[0], num[1]].BackColor = Color.FromArgb(63, 106, 101);
+            }
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -48,115 +110,154 @@ namespace _2048
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            switch (e.KeyCode)
+            if (IfICanMove())
             {
-                case Keys.A:
-                    for (int y = 0; y < 4; y++)
-                    {
-                        for (int x = 0; x < 3; x++)
+                bool moved = false;
+                switch (e.KeyCode)
+                {
+                    case Keys.A:
+                        for (int y = 0; y < 4; y++)
                         {
-                            for (int x2 = x + 1; x2 < 4; x2++)
+                            for (int x = 0; x < 3; x++)
                             {
-                                if (fields[y, x].Text == "" && fields[y, x2].Text != "")
+                                for (int x2 = x + 1; x2 < 4; x2++)
                                 {
-                                    fields[y, x].BackColor = fields[y, x2].BackColor;
-                                    fields[y, x].Text = fields[y, x2].Text;
-                                    fields[y, x2].Text = "";
-                                    fields[y, x2].BackColor = Color.FromArgb(62, 40, 97);
-                                }
-                                else if (fields[y, x].Text != "" && fields[y, x].Text == fields[y, x2].Text) {
-                                    int value = Convert.ToInt32(fields[y, x].Text) * 2;
-                                    fields[y, x].BackColor = Color.FromArgb(62, 40 + (5 * int.Parse(fields[y, x].Text)), 97);
-                                    fields[y, x].Text = Convert.ToString(value);
-                                    fields[y, x2].Text = "";
-                                    fields[y, x2].BackColor = Color.FromArgb(62, 40, 97);
+                                    if (fields[y, x].Text == "" && fields[y, x2].Text != "")
+                                    {
+                                        fields[y, x].BackColor = fields[y, x2].BackColor;
+                                        fields[y, x].Text = fields[y, x2].Text;
+                                        fields[y, x2].Text = "";
+                                        fields[y, x2].BackColor = Color.FromArgb(62, 40, 97);
+                                        moved = true;
+                                    }
+                                    else if (fields[y, x].Text != "" && fields[y, x].Text == fields[y, x2].Text)
+                                    {
+                                        int value = Convert.ToInt32(fields[y, x].Text) * 2;
+                                        HardColorChanging(fields[y, x]);
+                                        if (fields[y, x].Text == "1024" && fields[y, x].Text == "2048") {
+                                            fields[y, x].Font = new Font(fields[y, x].Font.FontFamily, 11, fields[y, x].Font.Style);
+                                        }
+                                        fields[y, x].Text = Convert.ToString(value);
+                                        fields[y, x2].Text = "";
+                                        fields[y, x2].BackColor = Color.FromArgb(62, 40, 97);
+                                        moved = true;
+                                        break;
+                                    }
                                 }
                             }
                         }
-                    }
-                    InitializeNewScore();
-                    break;
-                case Keys.D:
-                    for (int y = 0; y < 4; y++)
-                    {
-                        for (int x = 3; x >= 0; x--)
+                        if (moved) InitializeNewScore();
+                        moved = false;
+                        break;
+                    case Keys.D:
+                        for (int y = 0; y < 4; y++)
                         {
-                            for (int x2 = x-1; x2 >= 0; x2--)
+                            for (int x = 3; x >= 0; x--)
                             {
-                                if (fields[y, x].Text == "" && fields[y, x2].Text != "")
+                                for (int x2 = x - 1; x2 >= 0; x2--)
                                 {
-                                    fields[y, x].BackColor = fields[y, x2].BackColor;
-                                    fields[y, x].Text = fields[y, x2].Text;
-                                    fields[y, x2].Text = "";
-                                    fields[y, x2].BackColor = Color.FromArgb(62, 40, 97);
-                                }
-                                else if (fields[y, x].Text != "" && fields[y, x].Text == fields[y, x2].Text)
-                                {
-                                    int value = Convert.ToInt32(fields[y, x].Text) * 2;
-                                    fields[y, x].BackColor = Color.FromArgb(62, 40 + (5 * int.Parse(fields[y, x].Text)), 97);
-                                    fields[y, x].Text = Convert.ToString(value);
-                                    fields[y, x2].Text = "";
-                                    fields[y, x2].BackColor = Color.FromArgb(62, 40, 97);
+                                    if (fields[y, x].Text == "" && fields[y, x2].Text != "")
+                                    {
+                                        fields[y, x].BackColor = fields[y, x2].BackColor;
+                                        fields[y, x].Text = fields[y, x2].Text;
+                                        fields[y, x2].Text = "";
+                                        fields[y, x2].BackColor = Color.FromArgb(62, 40, 97);
+                                        moved = true;
+                                    }
+                                    else if (fields[y, x].Text != "" && fields[y, x].Text == fields[y, x2].Text)
+                                    {
+                                        int value = Convert.ToInt32(fields[y, x].Text) * 2;
+                                        HardColorChanging(fields[y, x]);
+                                        if (fields[y, x].Text == "1024" && fields[y, x].Text == "2048")
+                                        {
+                                            fields[y, x].Font = new Font(fields[y, x].Font.FontFamily, 11, fields[y, x].Font.Style);
+                                        }
+                                        fields[y, x].Text = Convert.ToString(value);
+                                        fields[y, x2].Text = "";
+                                        fields[y, x2].BackColor = Color.FromArgb(62, 40, 97);
+                                        moved = true;
+                                        break;
+                                    }
                                 }
                             }
                         }
-                    }
-                    InitializeNewScore();
-                    break;
-                case Keys.W:
-                    for (int y = 0; y < 4; y++)
-                    {
-                        for (int x = 3; x >= 0; x--)
+                        if (moved) InitializeNewScore();
+                        moved = false;
+                        break;
+                    case Keys.W:
+                        for (int y = 0; y < 4; y++)
                         {
-                            for (int y2 = y + 1; y2 < 4; y2++)
+                            for (int x = 3; x >= 0; x--)
                             {
-                                if (fields[y, x].Text == "" && fields[y2, x].Text != "")
+                                for (int y2 = y + 1; y2 < 4; y2++)
                                 {
-                                    fields[y, x].BackColor = fields[y2, x].BackColor;
-                                    fields[y, x].Text = fields[y2, x].Text;
-                                    fields[y2, x].Text = "";
-                                    fields[y2, x].BackColor = Color.FromArgb(62, 40, 97);
-                                }
-                                else if (fields[y, x].Text != "" && fields[y, x].Text == fields[y2, x].Text)
-                                {
-                                    int value = Convert.ToInt32(fields[y, x].Text) * 2;
-                                    fields[y, x].BackColor = Color.FromArgb(62, 40 + (5 * int.Parse(fields[y, x].Text)), 97);
-                                    fields[y, x].Text = Convert.ToString(value);
-                                    fields[y2, x].Text = "";
-                                    fields[y2, x].BackColor = Color.FromArgb(62, 40, 97);
-                                }
-                            }   
-                        }
-                    }
-                    InitializeNewScore();
-                    break;
-                case Keys.S:
-                    for (int y = 3; y > 0; y--)
-                    {
-                        for (int x = 3; x >= 0; x--)
-                        {
-                            for (int y2 = y - 1; y2 >=0; y2--)
-                            {
-                                if (fields[y, x].Text == "" && fields[y2, x].Text != "")
-                                {
-                                    fields[y, x].BackColor = fields[y2, x].BackColor;
-                                    fields[y, x].Text = fields[y2, x].Text;
-                                    fields[y2, x].Text = "";
-                                    fields[y2, x].BackColor = Color.FromArgb(62, 40, 97);
-                                }
-                                else if (fields[y, x].Text != "" && fields[y, x].Text == fields[y2, x].Text)
-                                {
-                                    int value = Convert.ToInt32(fields[y, x].Text) * 2;
-                                    fields[y, x].BackColor = Color.FromArgb(62, 40 + (5 * int.Parse(fields[y, x].Text)), 97);
-                                    fields[y, x].Text = Convert.ToString(value);
-                                    fields[y2, x].Text = "";
-                                    fields[y2, x].BackColor = Color.FromArgb(62, 40, 97);
+                                    if (fields[y, x].Text == "" && fields[y2, x].Text != "")
+                                    {
+                                        fields[y, x].BackColor = fields[y2, x].BackColor;
+                                        fields[y, x].Text = fields[y2, x].Text;
+                                        fields[y2, x].Text = "";
+                                        fields[y2, x].BackColor = Color.FromArgb(62, 40, 97);
+                                        moved = true;
+                                    }
+                                    else if (fields[y, x].Text != "" && fields[y, x].Text == fields[y2, x].Text)
+                                    {
+                                        int value = Convert.ToInt32(fields[y, x].Text) * 2;
+                                        HardColorChanging(fields[y, x]);
+                                        if (fields[y, x].Text == "1024" && fields[y, x].Text == "2048")
+                                        {
+                                            fields[y, x].Font = new Font(fields[y, x].Font.FontFamily, 11, fields[y, x].Font.Style);
+                                        }
+                                        fields[y, x].Text = Convert.ToString(value);
+                                        fields[y2, x].Text = "";
+                                        fields[y2, x].BackColor = Color.FromArgb(62, 40, 97);
+                                        moved = true;
+                                        break;
+                                    }
                                 }
                             }
                         }
-                    }
-                    InitializeNewScore();
-                    break;
+                        if (moved) InitializeNewScore();
+                        moved = false;
+                        break;
+                    case Keys.S:
+                        for (int y = 3; y > 0; y--)
+                        {
+                            for (int x = 3; x >= 0; x--)
+                            {
+                                for (int y2 = y - 1; y2 >= 0; y2--)
+                                {
+                                    if (fields[y, x].Text == "" && fields[y2, x].Text != "")
+                                    {
+                                        fields[y, x].BackColor = fields[y2, x].BackColor;
+                                        fields[y, x].Text = fields[y2, x].Text;
+                                        fields[y2, x].Text = "";
+                                        fields[y2, x].BackColor = Color.FromArgb(62, 40, 97);
+                                        moved = true;
+                                    }
+                                    else if (fields[y, x].Text != "" && fields[y, x].Text == fields[y2, x].Text)
+                                    {
+                                        int value = Convert.ToInt32(fields[y, x].Text) * 2;
+                                        HardColorChanging(fields[y, x]);
+                                        if (fields[y, x].Text == "1024" && fields[y, x].Text == "2048")
+                                        {
+                                            fields[y, x].Font = new Font(fields[y, x].Font.FontFamily, 11, fields[y, x].Font.Style);
+                                        }
+                                        fields[y, x].Text = Convert.ToString(value);
+                                        fields[y2, x].Text = "";
+                                        fields[y2, x].BackColor = Color.FromArgb(62, 40, 97);
+                                        moved = true;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        if (moved) InitializeNewScore();
+                        moved = false;
+                        break;
+                }
+            }
+            else {
+                MessageBox.Show("You Lose!");
             }
         }
     }
