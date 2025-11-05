@@ -29,19 +29,22 @@ namespace _2048
             };
 
         }
+        private void InitializeNewScore()
+        {
+            int[] num;
+            while (true)
+            {
+                num = new int[] { rndNum.Next(0, 3), rndNum.Next(0, 3) };
+                if (fields[num[0], num[1]].Text == "") break;
+            }
+            fields[num[0], num[1]].BackColor = Color.FromArgb(63, 196, 181);
+            fields[num[0], num[1]].Text = "2";
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            int[] num = new int[]{ rndNum.Next(0, 0), rndNum.Next(3, 3) };
-            fields[num[0], num[1]].BackColor = Color.FromArgb(63, 196, 181);
-            fields[num[0], num[1]].Text = "2";
-            int[] num2;
-            while (true){
-                num2 = new int[]{ rndNum.Next(0, 3), rndNum.Next(0, 3) };
-                if (num[1] != num2[1]) break;
-            }
-            fields[num2[0], num2[1]].BackColor = Color.FromArgb(63, 196, 181);
-            fields[num2[0], num2[1]].Text = "2";
+            InitializeNewScore();
+            InitializeNewScore();
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -65,6 +68,7 @@ namespace _2048
                             }
                         }
                     }
+                    InitializeNewScore();
                     break;
                 case Keys.D:
                     for (int y = 0; y < 4; y++)
@@ -83,6 +87,7 @@ namespace _2048
                             }
                         }
                     }
+                    InitializeNewScore();
                     break;
                 case Keys.W:
                     for (int y = 0; y < 4; y++)
@@ -101,6 +106,7 @@ namespace _2048
                             }   
                         }
                     }
+                    InitializeNewScore();
                     break;
                 case Keys.S:
                     for (int y = 3; y > 0; y--)
@@ -119,6 +125,7 @@ namespace _2048
                             }
                         }
                     }
+                    InitializeNewScore();
                     break;
             }
         }
