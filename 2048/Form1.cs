@@ -66,7 +66,7 @@ namespace _2048
                                 }
                                 else if (fields[y, x].Text != "" && fields[y, x].Text == fields[y, x2].Text) {
                                     int value = Convert.ToInt32(fields[y, x].Text) * 2;
-                                    fields[y, x].BackColor = Color.FromArgb(62, 40 - (10 * int.Parse(fields[y, x].Text)), 97)
+                                    fields[y, x].BackColor = Color.FromArgb(62, 40 + (5 * int.Parse(fields[y, x].Text)), 97);
                                     fields[y, x].Text = Convert.ToString(value);
                                     fields[y, x2].Text = "";
                                     fields[y, x2].BackColor = Color.FromArgb(62, 40, 97);
@@ -93,7 +93,7 @@ namespace _2048
                                 else if (fields[y, x].Text != "" && fields[y, x].Text == fields[y, x2].Text)
                                 {
                                     int value = Convert.ToInt32(fields[y, x].Text) * 2;
-                                    fields[y, x].BackColor = Color.FromArgb(62, 40 - (10 * int.Parse(fields[y, x].Text)), 97)
+                                    fields[y, x].BackColor = Color.FromArgb(62, 40 + (5 * int.Parse(fields[y, x].Text)), 97);
                                     fields[y, x].Text = Convert.ToString(value);
                                     fields[y, x2].Text = "";
                                     fields[y, x2].BackColor = Color.FromArgb(62, 40, 97);
@@ -120,7 +120,7 @@ namespace _2048
                                 else if (fields[y, x].Text != "" && fields[y, x].Text == fields[y2, x].Text)
                                 {
                                     int value = Convert.ToInt32(fields[y, x].Text) * 2;
-                                    fields[y, x].BackColor = Color.FromArgb(62, 40 - (10 * int.Parse(fields[y, x].Text)), 97)
+                                    fields[y, x].BackColor = Color.FromArgb(62, 40 + (5 * int.Parse(fields[y, x].Text)), 97);
                                     fields[y, x].Text = Convert.ToString(value);
                                     fields[y2, x].Text = "";
                                     fields[y2, x].BackColor = Color.FromArgb(62, 40, 97);
@@ -147,7 +147,7 @@ namespace _2048
                                 else if (fields[y, x].Text != "" && fields[y, x].Text == fields[y2, x].Text)
                                 {
                                     int value = Convert.ToInt32(fields[y, x].Text) * 2;
-                                    fields[y, x].BackColor = Color.FromArgb(62, 40 - (10 * int.Parse(fields[y, x].Text)), 97)
+                                    fields[y, x].BackColor = Color.FromArgb(62, 40 + (5 * int.Parse(fields[y, x].Text)), 97);
                                     fields[y, x].Text = Convert.ToString(value);
                                     fields[y2, x].Text = "";
                                     fields[y2, x].BackColor = Color.FromArgb(62, 40, 97);
