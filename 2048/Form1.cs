@@ -134,42 +134,7 @@ namespace _2048
             }
         }
 
-        private void UpdateBestScore()
-        {
-            if (totalScore > bestScore)
-            {
-                bestScore = totalScore;
-                BestNum.Text = bestScore.ToString();
-                stream = new FileStream(filePath, FileMode.Create, FileAccess.Write);
-                using (StreamReader reader = new StreamReader(filePath, Encoding.UTF8))
-                {
-                    int textScore = 0;
-                    while (!reader.EndOfStream)
-                    {
-                        string line = reader.ReadLine();
-                        if (line != null)
-                        {
-                            textScore = Convert.ToInt32(line);
-                            if (textScore > bestScore)
-                            {
-                                bestScore = textScore;
 
-                            }
-                        }
-                    }
-                    BestNum.Text = bestScore.ToString();
-                }
-                ;
-
-
-                using (StreamWriter writer = new StreamWriter(stream, Encoding.UTF8))
-                {
-                    writer.WriteLine(bestScore);
-                }
-                ;
-
-            }
-        }
         private bool IfICanMove()
         {
             for (int y = 0; y < 4; y++)
@@ -261,22 +226,14 @@ namespace _2048
                                     else if (fields[y, x].Text != "" && fields[y, x].Text == fields[y, x2].Text)
                                     {
                                         int value = Convert.ToInt32(fields[y, x].Text) * 2;
-                                        HardColorChanging(fields[y, x]);
-                                        if (fields[y, x].Text == "1024" || fields[y, x].Text == "2048")
-                                        {
-                                            fields[y, x].Font = new Font(fields[y, x].Font.FontFamily, 8, fields[y, x].Font.Style);
-                                        }
                                         fields[y, x].Text = Convert.ToString(value);
                                         fields[y, x2].Text = "";
                                         totalScore += value;
                                         ScoreNum.Text = totalScore.ToString();
 
                                         if (ChangeTheme.Text == "🌙")
-                                        {
                                             fields[y, x2].BackColor = Color.FromArgb(62, 40, 97);
-                                        }
                                         else if (ChangeTheme.Text == "🔅")
-                                        {
                                             fields[y, x2].BackColor = Color.FromArgb(112, 94, 77);
                                         }
                                         moved = true;
@@ -313,22 +270,14 @@ namespace _2048
                                     else if (fields[y, x].Text != "" && fields[y, x].Text == fields[y, x2].Text)
                                     {
                                         int value = Convert.ToInt32(fields[y, x].Text) * 2;
-                                        HardColorChanging(fields[y, x]);
-                                        if (fields[y, x].Text == "1024" || fields[y, x].Text == "2048")
-                                        {
-                                            fields[y, x].Font = new Font(fields[y, x].Font.FontFamily, 8, fields[y, x].Font.Style);
-                                        }
                                         fields[y, x].Text = Convert.ToString(value);
                                         fields[y, x2].Text = "";
                                         totalScore += value;
                                         ScoreNum.Text = totalScore.ToString();
 
                                         if (ChangeTheme.Text == "🌙")
-                                        {
                                             fields[y, x2].BackColor = Color.FromArgb(62, 40, 97);
-                                        }
                                         else if (ChangeTheme.Text == "🔅")
-                                        {
                                             fields[y, x2].BackColor = Color.FromArgb(112, 94, 77);
                                         }
                                         moved = true;
@@ -365,22 +314,14 @@ namespace _2048
                                     else if (fields[y, x].Text != "" && fields[y, x].Text == fields[y2, x].Text)
                                     {
                                         int value = Convert.ToInt32(fields[y, x].Text) * 2;
-                                        HardColorChanging(fields[y, x]);
-                                        if (fields[y, x].Text == "1024" || fields[y, x].Text == "2048")
-                                        {
-                                            fields[y, x].Font = new Font(fields[y, x].Font.FontFamily, 8, fields[y, x].Font.Style);
-                                        }
                                         fields[y, x].Text = Convert.ToString(value);
                                         fields[y2, x].Text = "";
                                         totalScore += value;
                                         ScoreNum.Text = totalScore.ToString();
 
                                         if (ChangeTheme.Text == "🌙")
-                                        {
                                             fields[y2, x].BackColor = Color.FromArgb(62, 40, 97);
-                                        }
                                         else if (ChangeTheme.Text == "🔅")
-                                        {
                                             fields[y2, x].BackColor = Color.FromArgb(112, 94, 77);
                                         }
                                         moved = true;
@@ -428,11 +369,8 @@ namespace _2048
                                         ScoreNum.Text = totalScore.ToString();
 
                                         if (ChangeTheme.Text == "🌙")
-                                        {
                                             fields[y2, x].BackColor = Color.FromArgb(62, 40, 97);
-                                        }
                                         else if (ChangeTheme.Text == "🔅")
-                                        {
                                             fields[y2, x].BackColor = Color.FromArgb(112, 94, 77);
                                         }
                                         moved = true;
@@ -513,17 +451,10 @@ namespace _2048
 
         private void NewGameButton_Click(object sender, EventArgs e)
         {
-            //File stream = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            //using (StreamWriter writer = new StreamWriter()
-            totalScore = 0;
-            ScoreNum.Text = totalScore.ToString();
-            for (int x = 0; x < 4; x++)
-            {
                 for (int y = 0; y < 4; y++)
                 {
                     if (ChangeTheme.Text == "🌙")
                     {
-                        fields[y, x].BackColor = Color.FromArgb(62, 40, 97);
                         fields[y, x].Text = "";
                     }
 
