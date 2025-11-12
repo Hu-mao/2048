@@ -18,12 +18,13 @@ namespace _2048
         Random rndNum = new Random();
         private int totalScore = 0;
         private int bestScore = 0;
-        private string filePath = "bestscore.txt";
-        //public dms
+        private string bestScoreFile = "bestscore.txt";
         FileStream stream = null;
         public Form1()
         {
+            LoadBestScore();
             InitializeComponent();
+            BestNum.Text = bestScore.ToString();
             this.KeyPreview = true;
             this.KeyDown += Form1_KeyDown;
 
@@ -125,16 +126,16 @@ namespace _2048
                 }
                 else if (label.Text == "1024")
                 {
-                    label.BackColor = Color.FromArgb(153, 256, 100);
+                    label.BackColor = Color.FromArgb(153, 255, 100);
                 }
                 else if (label.Text == "2048")
                 {
-                    label.BackColor = Color.FromArgb(253, 256, 100);
+                    label.BackColor = Color.FromArgb(253, 255, 100);
                 }
             }
         }
 
-
+        
         private bool IfICanMove()
         {
             for (int y = 0; y < 4; y++)
@@ -150,6 +151,30 @@ namespace _2048
             }
             return false;
         }
+        private bool CanMerge()
+        {
+            for (int y = 0; y < 4; y++)
+            {
+                for (int x = 0; x < 4; x++)
+                {
+                    if (fields[y, x].Text == "")
+                        return true;
+
+                    int current = int.Parse(fields[y, x].Text);
+
+                    if (x < 3 && fields[y, x + 1].Text != "" &&
+                        int.Parse(fields[y, x + 1].Text) == current)
+                        return true;
+
+                    if (y < 3 && fields[y + 1, x].Text != "" &&
+                        int.Parse(fields[y + 1, x].Text) == current)
+                        return true;
+                }
+            }
+            return false;
+        }
+
+
         private void InitializeNewScore()
         {
 
@@ -192,6 +217,23 @@ namespace _2048
             InitializeNewScore();
         }
 
+        private void UpdateLabelFont(Label label)
+        {
+            if (string.IsNullOrEmpty(label.Text))
+            {
+                label.Font = new Font(label.Font.FontFamily, 22, FontStyle.Bold);
+                return;
+            }
+
+            int length = label.Text.Length;
+            float size = 22;
+
+            if (length >= 4)
+                size = 17;
+
+            label.Font = new Font(label.Font.FontFamily, size, FontStyle.Bold);
+        }
+
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -227,6 +269,9 @@ namespace _2048
                                     {
                                         int value = Convert.ToInt32(fields[y, x].Text) * 2;
                                         fields[y, x].Text = Convert.ToString(value);
+                                        HardColorChanging(fields[y, x]);
+                                        UpdateLabelFont(fields[y, x]);
+
                                         fields[y, x2].Text = "";
                                         totalScore += value;
                                         ScoreNum.Text = totalScore.ToString();
@@ -235,7 +280,7 @@ namespace _2048
                                             fields[y, x2].BackColor = Color.FromArgb(62, 40, 97);
                                         else if (ChangeTheme.Text == "🔅")
                                             fields[y, x2].BackColor = Color.FromArgb(112, 94, 77);
-                                        }
+
                                         moved = true;
                                         break;
                                     }
@@ -271,6 +316,9 @@ namespace _2048
                                     {
                                         int value = Convert.ToInt32(fields[y, x].Text) * 2;
                                         fields[y, x].Text = Convert.ToString(value);
+                                        HardColorChanging(fields[y, x]);
+                                        UpdateLabelFont(fields[y, x]);
+
                                         fields[y, x2].Text = "";
                                         totalScore += value;
                                         ScoreNum.Text = totalScore.ToString();
@@ -279,7 +327,7 @@ namespace _2048
                                             fields[y, x2].BackColor = Color.FromArgb(62, 40, 97);
                                         else if (ChangeTheme.Text == "🔅")
                                             fields[y, x2].BackColor = Color.FromArgb(112, 94, 77);
-                                        }
+
                                         moved = true;
                                         break;
                                     }
@@ -314,8 +362,11 @@ namespace _2048
                                     else if (fields[y, x].Text != "" && fields[y, x].Text == fields[y2, x].Text)
                                     {
                                         int value = Convert.ToInt32(fields[y, x].Text) * 2;
-                                        fields[y, x].Text = Convert.ToString(value);
-                                        fields[y2, x].Text = "";
+                                        fields[y, x].Text = Convert.ToString(value); 
+                                        HardColorChanging(fields[y, x]);
+                                        UpdateLabelFont(fields[y, x]); 
+
+                                        fields[y2, x].Text = ""; 
                                         totalScore += value;
                                         ScoreNum.Text = totalScore.ToString();
 
@@ -323,9 +374,10 @@ namespace _2048
                                             fields[y2, x].BackColor = Color.FromArgb(62, 40, 97);
                                         else if (ChangeTheme.Text == "🔅")
                                             fields[y2, x].BackColor = Color.FromArgb(112, 94, 77);
-                                        }
+
                                         moved = true;
                                         break;
+
                                     }
                                 }
                             }
@@ -358,12 +410,10 @@ namespace _2048
                                     else if (fields[y, x].Text != "" && fields[y, x].Text == fields[y2, x].Text)
                                     {
                                         int value = Convert.ToInt32(fields[y, x].Text) * 2;
-                                        HardColorChanging(fields[y, x]);
-                                        if (fields[y, x].Text == "1024" || fields[y, x].Text == "2048")
-                                        {
-                                            fields[y, x].Font = new Font(fields[y, x].Font.FontFamily, 8, fields[y, x].Font.Style);
-                                        }
                                         fields[y, x].Text = Convert.ToString(value);
+                                        HardColorChanging(fields[y, x]);
+                                        UpdateLabelFont(fields[y, x]);
+
                                         fields[y2, x].Text = "";
                                         totalScore += value;
                                         ScoreNum.Text = totalScore.ToString();
@@ -372,7 +422,7 @@ namespace _2048
                                             fields[y2, x].BackColor = Color.FromArgb(62, 40, 97);
                                         else if (ChangeTheme.Text == "🔅")
                                             fields[y2, x].BackColor = Color.FromArgb(112, 94, 77);
-                                        }
+
                                         moved = true;
                                         break;
 
@@ -388,6 +438,7 @@ namespace _2048
             else
             {
                 MessageBox.Show("You Lose!");
+                SaveBestScore();
             }
         }
 
@@ -448,25 +499,68 @@ namespace _2048
                 }
             }
         }
-
-        private void NewGameButton_Click(object sender, EventArgs e)
+        private void SaveBestScore()
         {
-                for (int y = 0; y < 4; y++)
+            try
+            {
+                File.WriteAllText(bestScoreFile, bestScore.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error saving best score: " + ex.Message);
+            }
+        }
+        private void LoadBestScore()
+        {
+            try
+            {
+                if (File.Exists(bestScoreFile))
                 {
-                    if (ChangeTheme.Text == "🌙")
+                    string content = File.ReadAllText(bestScoreFile);
+                    int savedScore;
+                    if (int.TryParse(content, out savedScore))
                     {
-                        fields[y, x].Text = "";
-                    }
-
-                    else if (ChangeTheme.Text == "🔅")
-                    {
-                        fields[y, x].BackColor = Color.FromArgb(112, 94, 77);
-                        fields[y, x].Text = "";
+                        bestScore = savedScore;
                     }
                 }
             }
-            Form1_Load(sender, e);
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading best score: " + ex.Message);
+            }
+        }
+
+        
+        private void NewGameButton_Click(object sender, EventArgs e)
+        {
+            for (int y = 0; y < 4; y++)
+            {
+                for (int x = 0; x < 4; x++)
+                {
+                    fields[y, x].Text = "";
+                    if (ChangeTheme.Text == "🌙")
+                        fields[y, x].BackColor = Color.FromArgb(62, 40, 97);
+                    else
+                        fields[y, x].BackColor = Color.FromArgb(112, 94, 77);
+                }
+            }
+
+            if (totalScore > bestScore)
+            {
+                bestScore = totalScore;
+                SaveBestScore();
+            }
+
+            totalScore = 0;
+            ScoreNum.Text = totalScore.ToString();
+
+            LoadBestScore();
+            BestNum.Text = bestScore.ToString();
+
+            InitializeNewScore();
+            InitializeNewScore();
         }
 
     }
+
 }
